@@ -12,9 +12,17 @@
         <menus>
           <Menu mnemonicParsing="false" text="Arquivo">
             <items>
-              <MenuItem fx:id="menuItemSair" mnemonicParsing="false" text="Sair" />
+              <MenuItem fx:id="menuItemSair" mnemonicParsing="false" onAction="#menuItemSairOnAction" text="Sair" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Tabelas">
+              <items>
+                <MenuItem fx:id="menuItemTabelasAluno" mnemonicParsing="false" onAction="#menuItemTabelasAlunoOnAction" text="Aluno" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuItemTabelasDisciplinaOnAction" text="Disciplina" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuItemTabelasProfessorOnAction" text="Professor" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuItemTabelasCursoOnAction" text="Curso" />
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" onAction="#menuItemSobreOnAction" text="Ajuda">
             <items>
               <MenuItem fx:id="menuItemSobre" mnemonicParsing="false" text="Sobre" />

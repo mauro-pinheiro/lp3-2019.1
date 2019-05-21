@@ -35,22 +35,12 @@ public class CollegeApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
-        Parent splash = FXMLLoader.load(getClass().getResource("Splash.fxml"));
         Parent mainForm = FXMLLoader.load(getClass().getResource("MainForm.fxml"));
-        Stage stage = new Stage(StageStyle.TRANSPARENT);
-        stage.setScene(new Scene(splash));
-        stage.sizeToScene();
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), splash);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-        fadeIn.setCycleCount(1);
-        fadeIn.play();
-        fadeIn.setOnFinished(e -> stage.close());
-        stage.showAndWait();
 
         primaryStage.setTitle("College App");
         primaryStage.setMaximized(true);
         primaryStage.setScene(new Scene(mainForm));
+        primaryStage.setOnCloseRequest(e -> onCloseRequest(e));
         primaryStage.show();
     }
 
@@ -58,18 +48,14 @@ public class CollegeApp extends Application {
         launch(args);
     }
 
-    public void onCloseRequest(WindowEvent e){
-        if(!logged){
-            var dialog = new ConfimationDialog("Sair", "Deseja mesmo sair?");
-            dialog.showAndWait().ifPresent(b -> {
-                if(b == ButtonType.YES){
-                    Platform.exit();
-                } else {
-                    e.consume();
-                }
-            });
-        } else {
-            window.close();
-        }
+    public void onCloseRequest(WindowEvent e) {
+        var dialog = new ConfimationDialog("Sair", "Deseja mesmo sair?");
+        dialog.showAndWait().ifPresent(b -> {
+            if (b == ButtonType.YES) {
+                window.close();
+            } else {
+                e.consume();
+            }
+        });
     }
 }
