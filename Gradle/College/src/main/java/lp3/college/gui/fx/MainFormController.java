@@ -79,6 +79,22 @@ public class MainFormController implements Initializable {
         anchorPane.getChildren().setAll(cursoForm);
     }
 
+    public void menuItemSpfGradeOnAction() throws IOException {
+        Parent gradeForm = FXMLLoader.load(getClass().getResource("GradeForm.fxml"));
+        anchorPane.getChildren().setAll(gradeForm);
+    }
+    
+    public void menuItemSpfMatAlunoOnAction() throws IOException {
+        Parent matAlunoForm = FXMLLoader.load(getClass().getResource("MatAluno.fxml"));
+        anchorPane.getChildren().setAll(matAlunoForm);
+    }
+
+    public void menuItemSpfProfDiscOnAction() throws IOException {
+        Parent profDiscForm = FXMLLoader.load(getClass().getResource("ProfDisc.fxml"));
+        anchorPane.getChildren().setAll(profDiscForm);
+    }
+
+
     private void loadSplash() throws IOException {
         Parent splash = FXMLLoader.load(getClass().getResource("Splash.fxml"));
         Stage stage = new Stage(StageStyle.TRANSPARENT);

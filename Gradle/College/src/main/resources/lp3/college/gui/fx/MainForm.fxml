@@ -23,6 +23,13 @@
                   <MenuItem mnemonicParsing="false" onAction="#menuItemTabelasCursoOnAction" text="Curso" />
               </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="SPF">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#menuItemSpfGradeOnAction" text="Grade" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuItemSpfMatAlunoOnAction" text="Matricula Aluno" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuItemSpfProfDiscOnAction" text="Professor Disciplina" />
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" onAction="#menuItemSobreOnAction" text="Ajuda">
             <items>
               <MenuItem fx:id="menuItemSobre" mnemonicParsing="false" text="Sobre" />

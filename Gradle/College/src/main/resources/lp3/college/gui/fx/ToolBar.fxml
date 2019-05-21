@@ -5,9 +5,9 @@
 
 <ToolBar style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lp3.college.gui.fx.ToolBarController">
   <items>
-    <Button fx:id="buttonNovo" mnemonicParsing="false" style="-fx-background-color: transparent;" />
-      <Button fx:id="buttonAbrir" mnemonicParsing="false" style="-fx-background-color: transparent;" />
-      <Button fx:id="buttonSalvar" mnemonicParsing="false" style="-fx-background-color: transparent;" />
-      <Button fx:id="buttonDeletar" mnemonicParsing="false" style="-fx-background-color: transparent;" />
+    <Button fx:id="buttonNovo" mnemonicParsing="false" />
+      <Button fx:id="buttonAbrir" mnemonicParsing="false" />
+      <Button fx:id="buttonSalvar" mnemonicParsing="false" />
+      <Button fx:id="buttonDeletar" mnemonicParsing="false" />
   </items>
 </ToolBar>
