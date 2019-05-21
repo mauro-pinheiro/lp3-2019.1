@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lp3.college.gui.fx.MainFormController">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="Arquivo">
+            <items>
+              <MenuItem fx:id="menuItemSair" mnemonicParsing="false" onAction="#menuItemSairOnAction" text="Sair" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Tabelas">
+              <items>
+                <MenuItem fx:id="menuItemTabelasAluno" mnemonicParsing="false" onAction="#menuItemTabelasAlunoOnAction" text="Aluno" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuItemTabelasDisciplinaOnAction" text="Disciplina" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuItemTabelasProfessorOnAction" text="Professor" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuItemTabelasCursoOnAction" text="Curso" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="SPF">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#menuItemSpfGradeOnAction" text="Grade" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuItemSpfMatAlunoOnAction" text="Matricula Aluno" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuItemSpfProfDiscOnAction" text="Professor Disciplina" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" onAction="#menuItemSobreOnAction" text="Ajuda">
+            <items>
+              <MenuItem fx:id="menuItemSobre" mnemonicParsing="false" text="Sobre" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane fx:id="anchorPane" prefHeight="391.0" prefWidth="600.0" />
+   </children>
+</VBox>

@@ -1,16 +1,38 @@
 plugins {
     id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
-
-group 'lp3'
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 12
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+javafx {
+    version = "12"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
+
+dependencies{
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+sourceSets{
+    main{
+        java{
+            srcDirs = ["src/main/java"]
+        }
+        resources{
+            srcDirs = ["src/main/resources"]
+        }
+    }
+}
+
+group = 'lp3.college'
+version = '1.0-SNAPSHOT'
+
+mainClassName = 'lp3.college.Main'
