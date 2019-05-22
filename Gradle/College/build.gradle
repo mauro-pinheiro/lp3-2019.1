@@ -1,6 +1,7 @@
 plugins {
   id 'application'
   id 'org.openjfx.javafxplugin' version '0.0.7'
+  id 'com.github.johnrengelman.shadow' version '5.0.0'
 }
 
 repositories {
@@ -34,5 +35,8 @@ sourceSets{
 
 group = 'lp3.college'
 version = '1.0-SNAPSHOT'
+
+sourceCompatibility  = 8
+targetCompatibility = 8
 
 mainClassName = 'lp3.college.Main'

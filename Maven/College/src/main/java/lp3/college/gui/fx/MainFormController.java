@@ -45,7 +45,7 @@ public class MainFormController implements Initializable {
     }
 
     public void menuItemSairOnAction(ActionEvent e) {
-        var window = CollegeApp.getInstance().window;
+        Stage window = (Stage) CollegeApp.getInstance().window;
         window.fireEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
 

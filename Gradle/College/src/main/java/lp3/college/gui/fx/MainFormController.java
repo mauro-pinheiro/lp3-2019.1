@@ -38,14 +38,13 @@ public class MainFormController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             loadSplash();
-            loadLogin();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void menuItemSairOnAction(ActionEvent e) {
-        var window = CollegeApp.getInstance().window;
+        Stage window = (Stage) CollegeApp.getInstance().window;
         window.fireEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
 
@@ -100,6 +99,7 @@ public class MainFormController implements Initializable {
         Stage stage = new Stage(StageStyle.TRANSPARENT);
         stage.setScene(new Scene(splash));
         stage.sizeToScene();
+        stage.requestFocus();
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), splash);
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
@@ -107,19 +107,5 @@ public class MainFormController implements Initializable {
         fadeIn.play();
         fadeIn.setOnFinished(e -> stage.close());
         stage.showAndWait();
-    }
-
-    private void loadLogin() throws IOException {
-        Parent loginForm = FXMLLoader.load(getClass().getResource("LoginForm.fxml"));
-        Stage stage = new Stage(StageStyle.UTILITY);
-        stage.setTitle("Login");
-        stage.setScene(new Scene(loginForm));
-        stage.sizeToScene();
-        stage.setOnCloseRequest(e -> LoginOnCloseRequest(e));
-        stage.showAndWait();
-    }
-
-    public void LoginOnCloseRequest(WindowEvent e){
-        Platform.exit();
     }
 }

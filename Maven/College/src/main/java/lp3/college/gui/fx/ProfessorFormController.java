@@ -22,8 +22,8 @@ public class ProfessorFormController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-             var toolBar = (ToolBar) FXMLLoader.load(getClass().getResource("ToolBar.fxml"));
-             borderPane.setTop(toolBar);
+            ToolBar toolBar = (ToolBar) FXMLLoader.load(getClass().getResource("ToolBar.fxml"));
+            borderPane.setTop(toolBar);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

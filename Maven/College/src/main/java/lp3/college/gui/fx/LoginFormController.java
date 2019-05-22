@@ -29,10 +29,10 @@ public class LoginFormController implements Initializable {
     }
 
     public void buttonEntrarOnAction(ActionEvent e){
-        var source = (Button) e.getSource();
-        var stage = (Stage) source.getScene().getWindow();
-        var usuario = textFieldUsuario.getText();
-        var senha = passwordFieldSenha.getText();
+        Button source = (Button) e.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        String usuario = textFieldUsuario.getText();
+        String senha = passwordFieldSenha.getText();
         if(usuario.equals("admin") && senha.equals("admin")){
             stage.close();
         } else {

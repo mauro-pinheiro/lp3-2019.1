@@ -49,7 +49,7 @@ public class CollegeApp extends Application {
     }
 
     public void onCloseRequest(WindowEvent e) {
-        var dialog = new ConfimationDialog("Sair", "Deseja mesmo sair?");
+        ConfimationDialog dialog = new ConfimationDialog("Sair", "Deseja mesmo sair?");
         dialog.showAndWait().ifPresent(b -> {
             if (b == ButtonType.YES) {
                 window.close();
