@@ -3,7 +3,6 @@ package lp3.college.gui.fx;
 
 import java.io.IOException;
 
-import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +13,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import javafx.util.Duration;
 
 public class CollegeApp extends Application {
     private static CollegeApp instance = null;

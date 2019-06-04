@@ -20,17 +20,20 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Label text="Código" />
             <Label text="Disciplina" GridPane.rowIndex="1" />
-            <Label text="Ementa" GridPane.rowIndex="3" />
+            <Label text="Ementa" GridPane.rowIndex="4" />
             <TextField fx:id="textFieldCodigo" GridPane.columnIndex="1" />
             <TextField fx:id="textFieldNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Carga Horária" GridPane.rowIndex="2" />
             <TextField fx:id="textFieldCh" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextArea fx:id="textAreaEmenta" prefHeight="107.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextArea fx:id="textAreaEmenta" prefHeight="107.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="Ano" GridPane.rowIndex="3" />
+            <TextField fx:id="textFieldAno" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
          <opaqueInsets>
             <Insets />

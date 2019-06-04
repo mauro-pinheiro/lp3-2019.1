@@ -19,13 +19,11 @@ public class CursoFormController implements Initializable {
     @FXML
     private BorderPane borderPane;
 
+    private ToolBar toolBar;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            ToolBar toolBar = (ToolBar) FXMLLoader.load(getClass().getResource("ToolBar.fxml"));
-            borderPane.setTop(toolBar);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        toolBar = new BarraFerramentas();
+        borderPane.setTop(toolBar);
     }
 }

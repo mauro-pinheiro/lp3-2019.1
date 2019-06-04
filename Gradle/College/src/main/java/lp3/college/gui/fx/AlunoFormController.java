@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 
 public class AlunoFormController implements Initializable {
     @FXML
@@ -28,13 +27,11 @@ public class AlunoFormController implements Initializable {
     @FXML
     private BorderPane borderPane;
 
+    private ToolBar toolBar;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            ToolBar toolBar = (ToolBar) FXMLLoader.load(getClass().getResource("ToolBar.fxml"));
-            borderPane.setTop(toolBar);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        toolBar = new BarraFerramentas();
+        borderPane.setTop(toolBar);
     }
 }

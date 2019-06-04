@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
