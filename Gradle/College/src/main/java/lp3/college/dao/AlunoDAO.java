@@ -129,7 +129,7 @@ public class AlunoDAO implements DAO<Aluno> {
         }
     }
 
-    public Aluno atualizar(Aluno curso){
+    public Aluno atualiza(Aluno curso){
         String sql = "update aluno set codigo = ?, nome = ?, rg = ?, cpf = ?, telefone ?, endereco = ? where idAluno = ?";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){

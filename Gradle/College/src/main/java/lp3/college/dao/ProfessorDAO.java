@@ -68,16 +68,16 @@ public class ProfessorDAO implements DAO<Professor> {
             String codigo = resultSet.getString("codigo");
             int id = resultSet.getInt("idProfessor");
 
-            Professor curso = new Professor(codigo, nome);
-            curso.setId(id);
-            return curso;
+            Professor professor = new Professor(codigo, nome);
+            professor.setId(id);
+            return professor;
         }catch(SQLException e){
             throw new RuntimeException(e.getMessage());
         }
     }
 
     public Professor buscaPorId(int id){
-        String sql = "select * from Professor where id = ?";
+        String sql = "select * from Professor where idProfessor = ?";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
             statement.setInt(1, id);
@@ -92,7 +92,7 @@ public class ProfessorDAO implements DAO<Professor> {
     }
 
     public Professor buscaPorNome(String nome){
-        String sql = "select * from Professor where nome = ?";
+        String sql = "select * from professor where nome = ?";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
             statement.setString(1, nome);
@@ -107,7 +107,7 @@ public class ProfessorDAO implements DAO<Professor> {
     }
 
     public Professor buscaPorCodigo(String codigo){
-        String sql = "select * from Professor where codigo = ?";
+        String sql = "select * from professor where codigo = ?";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
             statement.setString(1, codigo);
@@ -121,8 +121,8 @@ public class ProfessorDAO implements DAO<Professor> {
         }
     }
 
-    public Professor atualizar(Professor professor){
-        String sql = "update Professor set codigo = ?, nome = ? where idProfessor = ?";
+    public Professor atualiza(Professor professor){
+        String sql = "update professor set codigo = ?, nome = ? where idProfessor = ?";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
             statement.setString(1, professor.getCodigo());
@@ -137,7 +137,12 @@ public class ProfessorDAO implements DAO<Professor> {
     }
 
     public static void main(String[] args) {
-        new AlunoDAO(Database.getConexao()).getAll().forEach(System.out::println);
+        ProfessorDAO dao = new ProfessorDAO(Database.getConexao());
+        Professor p = dao.buscaPorCodigo("1");
+        p.setNome("Joao Carlos Pinheiro");
+        dao.atualiza(p);
+        p = dao.buscaPorCodigo("1");
+        System.out.println(p);
     }
 
     @Override

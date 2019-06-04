@@ -5,8 +5,10 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import lp3.college.dao.ProfessorDAO;
 import lp3.college.entidades.Professor;
 import lp3.college.infra.Database;
@@ -17,27 +19,30 @@ public class ProfessorFormController implements Initializable {
     @FXML
     private TextField textFieldNome;
     @FXML
-    private BorderPane borderPane;
-
-    private BarraFerramentas toolBar;
+    private Button buttonNovo;
+    @FXML
+    private Button buttonAbrir;
+    @FXML
+    private Button buttonSalvar;
+    @FXML
+    private Button buttonDeletar;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        toolBar = new BarraFerramentas();
-        toolBar.setNewAction(e -> acaoNovo());
-        toolBar.setOpenAction(e -> acaoAbrir());
-        toolBar.setSaveAction(e -> acaoSalvar());
-        toolBar.setDeleteAction(e -> acaoDeletar());
-        borderPane.setTop(toolBar);
+        Image novoIcon = new Image(getClass().getResourceAsStream("images/new doc.png"));
+        Image openIcon = new Image(getClass().getResourceAsStream("images/open doc.png"));
+        Image SaveIcon = new Image(getClass().getResourceAsStream("images/save doc.png"));
+        Image DelIcon = new Image(getClass().getResourceAsStream("images/delete doc.png"));
+
+        buttonNovo.setGraphic(new ImageView(novoIcon));
+        buttonAbrir.setGraphic(new ImageView(openIcon));
+        buttonSalvar.setGraphic(new ImageView(SaveIcon));
+        buttonDeletar.setGraphic(new ImageView(DelIcon));
     }
 
     public void acaoNovo() {
-        String codigo = textFieldCodigo.getText();
-        String nome = textFieldNome.getText();
-
-        Professor p = new Professor(codigo, nome);
-        ProfessorDAO dao = new ProfessorDAO(Database.getConexao());
-        dao.salva(p);
+        textFieldCodigo.clear();
+        textFieldNome.clear();
     }
 
     public void acaoAbrir() {
@@ -62,9 +67,17 @@ public class ProfessorFormController implements Initializable {
     public void acaoSalvar() {
         String codigo = textFieldCodigo.getText();
         String nome = textFieldNome.getText();
-        Professor p = new Professor(codigo, nome);
         ProfessorDAO dao = new ProfessorDAO(Database.getConexao());
-        dao.atualizar(p);
+        Professor p = dao.buscaPorCodigo(codigo);
+        System.out.println(codigo);
+        if(p == null){
+            p = new Professor(codigo, nome);
+            dao.salva(p);
+        } else {
+            dao.atualiza(p);
+        }
+        p = dao.buscaPorCodigo(codigo);
+        System.out.println(p);
     }
 
     public void acaoDeletar() {
@@ -73,11 +86,6 @@ public class ProfessorFormController implements Initializable {
         Professor p = new Professor(codigo, nome);
         ProfessorDAO dao = new ProfessorDAO(Database.getConexao());
         dao.deleta(p);
-        limpar();
-    }
-
-    public void limpar() {
-        textFieldCodigo.clear();
-        textFieldNome.clear();
+        acaoNovo();
     }
 }

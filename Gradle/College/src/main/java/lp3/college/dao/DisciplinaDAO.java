@@ -70,9 +70,10 @@ public class DisciplinaDAO implements DAO<Disciplina> {
             String codigo = resultSet.getString("codigo");
             String ano = resultSet.getString("ano");
             String ementa = resultSet.getString("ementa");
+            String ch = resultSet.getString("ch");
             int id = resultSet.getInt("idCurso");
 
-            Disciplina curso = new Disciplina(codigo, nome, ano, ementa);
+            Disciplina curso = new Disciplina(codigo, nome, ano, ementa, ch);
             curso.setId(id);
             return curso;
         }catch(SQLException e){
@@ -125,7 +126,7 @@ public class DisciplinaDAO implements DAO<Disciplina> {
         }
     }
 
-    public Disciplina atualizar(Disciplina curso){
+    public Disciplina atualiza(Disciplina curso){
         String sql = "update disciplina set codigo = ?, nome = ?, ano = ?, ementa = ? where idDisciplina = ?";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
@@ -147,7 +148,16 @@ public class DisciplinaDAO implements DAO<Disciplina> {
     }
 
     @Override
-    public Disciplina deleta(Disciplina t) {
-        return null;
+    public Disciplina deleta(Disciplina disciplina) {
+        String sql = "delete from disciplina where idDisciplina = ?";
+
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            statement.setInt(1, disciplina.getId());
+
+            statement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return disciplina;
     }
 }

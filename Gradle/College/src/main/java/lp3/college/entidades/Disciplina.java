@@ -9,15 +9,17 @@ public class Disciplina{
     private String nome;
     private String ementa;
     private String ano;
+    private String cargaHoraria;
     private Curso curso;
     private Set<Professor> ministrantes = new HashSet<>();
     private Set<Aluno> matriculados = new HashSet<>();
 
-    public Disciplina(String codigo, String nome, String ano, String ementa){
+    public Disciplina(String codigo, String nome, String ano, String ementa, String ch){
         this.codigo = codigo;
         this.nome = nome;
         this.ano = ano;
         this.ementa = ementa;
+        this.cargaHoraria = ch;
     }
 
     public int getId() {
@@ -100,8 +102,17 @@ public class Disciplina{
 
     @Override
     public String toString() {
-        return "Disciplina [ano=" + ano + ", codigo=" + codigo + ", curso=" + curso + ", ementa=" + ementa + ", id="
-                + id + ", nome=" + nome + "]";
+        return "Disciplina [ano=" + ano + ", cargaHoraria=" + cargaHoraria + ", codigo=" + codigo + ", curso=" + curso
+                + ", ementa=" + ementa + ", id=" + id + ", matriculados=" + matriculados + ", ministrantes="
+                + ministrantes + ", nome=" + nome + "]";
+    }
+
+    public String getCargaHoraria() {
+        return cargaHoraria;
+    }
+
+    public void setCargaHoraria(String cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
     }
 
 }

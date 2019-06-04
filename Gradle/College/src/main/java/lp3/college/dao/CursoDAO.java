@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lp3.college.entidades.Curso;
+import lp3.college.infra.Database;
 
 public class CursoDAO implements DAO<Curso> {
     private Connection conexao;
@@ -120,7 +121,7 @@ public class CursoDAO implements DAO<Curso> {
         }
     }
 
-    public Curso atualizar(Curso curso){
+    public Curso atualiza(Curso curso){
         String sql = "update curso set codigo = ?, nome = ? where idCurso = ?";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
@@ -137,7 +138,31 @@ public class CursoDAO implements DAO<Curso> {
     }
 
     @Override
-    public Curso deleta(Curso t) {
-        return null;
+    public Curso deleta(Curso curso) {
+        String sql = "delete from curso where idCurso = ?";
+
+        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+            statement.setInt(1, curso.getId());
+
+            statement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return curso;
+    }
+
+    public static void main(String[] args) {
+        Curso curso = new Curso("01", "Sistemas de Informacao");
+        CursoDAO dao = new CursoDAO(Database.getConexao());
+        dao.salva(curso);
+        curso = dao.buscaPorCodigo("01");
+        System.out.println(curso);
+        curso.setNome("Sistemas de Informação");
+        dao.atualiza(curso);
+        curso = dao.buscaPorCodigo("01");
+        System.out.println(curso);
+        dao.deleta(curso);
+        curso = dao.buscaPorCodigo("01");
+        System.out.println(curso);
     }
 }
