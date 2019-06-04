@@ -1,17 +1,18 @@
 package lp3.college.gui.fx;
 
 
-import javafx.animation.FadeTransition;
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import javafx.util.Duration;
 
 public class CollegeApp extends Application {
     private static CollegeApp instance = null;
@@ -41,7 +42,10 @@ public class CollegeApp extends Application {
         primaryStage.setMaximized(true);
         primaryStage.setScene(new Scene(mainForm));
         primaryStage.setOnCloseRequest(e -> onCloseRequest(e));
+        primaryStage.requestFocus();
         primaryStage.show();
+
+        loadLogin();
     }
 
     public void run(String[] args){
@@ -59,7 +63,18 @@ public class CollegeApp extends Application {
         });
     }
 
-    public static void main(String args[]){
-        getInstance().run(args);
+    private void loadLogin() throws IOException {
+        Parent loginForm = FXMLLoader.load(getClass().getResource("LoginForm.fxml"));
+        Stage stage = new Stage(StageStyle.UTILITY);
+        stage.setTitle("Login");
+        stage.setScene(new Scene(loginForm));
+        stage.sizeToScene();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setOnCloseRequest(e -> LoginOnCloseRequest(e));
+        stage.showAndWait();
+    }
+
+    public void LoginOnCloseRequest(WindowEvent e){
+        Platform.exit();
     }
 }
