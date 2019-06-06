@@ -65,26 +65,26 @@ public class ProfessorFormController implements Initializable {
     }
 
     public void acaoSalvar() {
-        String codigo = textFieldCodigo.getText();
-        String nome = textFieldNome.getText();
         ProfessorDAO dao = new ProfessorDAO(Database.getConexao());
-        Professor p = dao.buscaPorCodigo(codigo);
-        System.out.println(codigo);
-        if(p == null){
-            p = new Professor(codigo, nome);
-            dao.salva(p);
-        } else {
-            dao.atualiza(p);
-        }
-        p = dao.buscaPorCodigo(codigo);
-        System.out.println(p);
-    }
-
-    public void acaoDeletar() {
         String codigo = textFieldCodigo.getText();
         String nome = textFieldNome.getText();
         Professor p = new Professor(codigo, nome);
+        int id = dao.existe(p);
+        
+        if(id <= 0){
+            dao.salva(p);
+        } else {
+            p.setId(id);
+            dao.atualiza(p);
+        }
+    }
+
+    public void acaoDeletar() {
         ProfessorDAO dao = new ProfessorDAO(Database.getConexao());
+        String codigo = textFieldCodigo.getText();
+        String nome = textFieldNome.getText();
+        
+        Professor p = new Professor(codigo, nome);
         dao.deleta(p);
         acaoNovo();
     }

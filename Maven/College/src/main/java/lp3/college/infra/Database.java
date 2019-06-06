@@ -19,9 +19,14 @@ public final class Database {
     {
         if(conexao == null){
             try{
-                Properties propriedades = carregaPropriedades();
-                String url = propriedades.getProperty("dburl");     //usa a url no arquivo propriedades
-                conexao = DriverManager.getConnection(url,propriedades);
+                // Properties propriedades = carregaPropriedades();
+                // String url = propriedades.getProperty("dburl");     //usa a url no arquivo propriedades
+                // conexao = DriverManager.getConnection(url,propriedades);
+                String url = "jdbc:mysql://localhost/collegedb?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+                String user = "collegeApp";
+                String password = "1234";
+                conexao = DriverManager.getConnection(url, user, password);
+
             } catch (SQLException e) {
                 throw new RuntimeException(e.getMessage());
             }
@@ -32,13 +37,13 @@ public final class Database {
     /**
      * Carrega o arquivo de propriedades db.properties
      */
-    private static Properties carregaPropriedades(){
-        try(FileInputStream fs = new FileInputStream("src/main/resources/db.properties")){
-            Properties props = new Properties();
-            props.load(fs);
-            return props;
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
+    // private static Properties carregaPropriedades(){
+    //     try(FileInputStream fs = new FileInputStream("src/main/resources/db.properties")){
+    //         Properties props = new Properties();
+    //         props.load(fs);
+    //         return props;
+    //     } catch (IOException e) {
+    //         throw new RuntimeException(e.getMessage());
+    //     }
+    // }
 }

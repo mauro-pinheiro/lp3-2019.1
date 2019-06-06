@@ -8,8 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import lp3.college.dao.DisciplinaDAO;
 import lp3.college.entidades.Disciplina;
 import lp3.college.infra.Database;
@@ -24,8 +22,6 @@ public class DisciplinaFormController implements Initializable {
     @FXML
     private TextField textFieldCh;
     @FXML
-    private TextField textFieldAno;
-    @FXML
     private Button buttonNovo;
     @FXML
     private Button buttonAbrir;
@@ -36,31 +32,27 @@ public class DisciplinaFormController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Image novoIcon = new Image(getClass().getResourceAsStream("images/new doc.png"));
-        Image openIcon = new Image(getClass().getResourceAsStream("images/open doc.png"));
-        Image SaveIcon = new Image(getClass().getResourceAsStream("images/save doc.png"));
-        Image DelIcon = new Image(getClass().getResourceAsStream("images/delete doc.png"));
-
-        buttonNovo.setGraphic(new ImageView(novoIcon));
-        buttonAbrir.setGraphic(new ImageView(openIcon));
-        buttonSalvar.setGraphic(new ImageView(SaveIcon));
-        buttonDeletar.setGraphic(new ImageView(DelIcon));
+        
     }
 
     public void acaoNovo() {
         textFieldCodigo.clear();
         textFieldNome.clear();
+        textAreaEmenta.clear();
+        textFieldCh.clear();
     }
 
     public void acaoAbrir() {
         String codigo = textFieldCodigo.getText();
         String nome = textFieldNome.getText();
+        String ch = textFieldCh.getText();
+        String ementa = textAreaEmenta.getText();
         Disciplina c;
         DisciplinaDAO dao = new DisciplinaDAO(Database.getConexao());
 
-        if (!codigo.isBlank()) {
+        if (!codigo.isEmpty()) {
             c = dao.buscaPorCodigo(codigo);
-        } else if (!nome.isBlank()) {
+        } else if (!nome.isEmpty()) {
             c = dao.buscaPorNome(nome);
         } else {
             System.out.println("Tudo vazio");
@@ -69,38 +61,37 @@ public class DisciplinaFormController implements Initializable {
 
         textFieldCodigo.setText(c.getCodigo());
         textFieldNome.setText(c.getNome());
+        textAreaEmenta.setText(c.getEmenta());
+        textFieldCh.setText(c.getCargaHoraria());
     }
 
     public void acaoSalvar() {
+        DisciplinaDAO dao = new DisciplinaDAO(Database.getConexao());
         String codigo = textFieldCodigo.getText();
         String nome = textFieldNome.getText();
-        String ementa = textAreaEmenta.getText();
-        String ano = textFieldAno.getText();
         String ch = textFieldCh.getText();
-
-        DisciplinaDAO dao = new DisciplinaDAO(Database.getConexao());
-        Disciplina d = dao.buscaPorCodigo(codigo);
-        System.out.println(codigo);
-        if(d == null){
-            d = new Disciplina(codigo, nome, ano, ementa, ch);
+        String ementa = textAreaEmenta.getText();
+        
+        Disciplina d = new Disciplina(codigo, nome, ementa, ch);
+        int id = dao.existe(d);
+        
+        if(id <= 0){
             dao.salva(d);
         } else {
+            d.setId(id);
             dao.atualiza(d);
         }
-        d = dao.buscaPorCodigo(codigo);
-        System.out.println(d);
     }
 
     public void acaoDeletar() {
+        DisciplinaDAO dao = new DisciplinaDAO(Database.getConexao());
         String codigo = textFieldCodigo.getText();
         String nome = textFieldNome.getText();
-        String ementa = textAreaEmenta.getText();
-        String ano = textFieldAno.getText();
         String ch = textFieldCh.getText();
+        String ementa = textAreaEmenta.getText();
         
-        Disciplina p = new Disciplina(codigo, nome, ano, ementa, ch);
-        DisciplinaDAO dao = new DisciplinaDAO(Database.getConexao());
-        dao.deleta(p);
+        Disciplina d = new Disciplina(codigo, nome, ementa, ch);
+        dao.deleta(d);
         acaoNovo();
     }
 }

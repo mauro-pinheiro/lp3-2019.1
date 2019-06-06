@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - AlunoDAO",
+            "request": "launch",
+            "mainClass": "lp3.college.dao.AlunoDAO",
+            "projectName": "College"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - ProfessorDAO",
             "request": "launch",
             "mainClass": "lp3.college.dao.ProfessorDAO",

@@ -8,12 +8,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lp3.college.gui.fx.GradeForm">
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lp3.college.gui.fx.ProfDisc">
    <center>
       <GridPane hgap="10.0" vgap="10.0" BorderPane.alignment="CENTER">
          <columnConstraints>
@@ -28,7 +30,7 @@
             <Label text="Professor" />
             <Label text="Disciplina" GridPane.rowIndex="1" />
             <TextField fx:id="textFieldCodigo" GridPane.columnIndex="1" />
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="comboBoxDisciplina" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -39,7 +41,7 @@
       </GridPane>
    </center>
    <bottom>
-      <TableView prefHeight="163.0" prefWidth="218.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableView" prefHeight="163.0" prefWidth="218.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn prefWidth="110.0" resizable="false" text="Professor" />
           <TableColumn prefWidth="107.0" text="Disciplina" />
@@ -52,10 +54,38 @@
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button fx:id="buttonNovo" mnemonicParsing="false" onAction="#acaoNovo" />
-            <Button fx:id="buttonAbrir" mnemonicParsing="false" onAction="#acaoAbrir" />
-            <Button fx:id="buttonSalvar" mnemonicParsing="false" onAction="#acaoSalvar" />
-            <Button fx:id="buttonDeletar" mnemonicParsing="false" onAction="#acaoDeletar" />
+          <Button fx:id="buttonNovo" mnemonicParsing="false" onAction="#acaoNovo">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/new%20doc.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="buttonAbrir" mnemonicParsing="false" onAction="#acaoAbrir">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/open%20doc.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="buttonSalvar" mnemonicParsing="false" onAction="#acaoSalvar">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/save%20doc.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="buttonDeletar" mnemonicParsing="false">
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/delete%20doc.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
         </items>
       </ToolBar>
    </top>

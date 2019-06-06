@@ -28,8 +28,6 @@ public class AlunoFormController implements Initializable {
     @FXML
     private TextField textFieldTelefone;
     @FXML
-    private BorderPane borderPane;
-    @FXML
     private Button buttonNovo;
     @FXML
     private Button buttonAbrir;
@@ -66,9 +64,9 @@ public class AlunoFormController implements Initializable {
         Aluno a;
         AlunoDAO dao = new AlunoDAO(Database.getConexao());
 
-        if (!codigo.isBlank()) {
+        if (!codigo.isEmpty()) {
             a = dao.buscaPorCodigo(codigo);
-        } else if (!nome.isBlank()) {
+        } else if (!nome.isEmpty()) {
             a = dao.buscaPorNome(nome);
         } else {
             System.out.println("Tudo vazio");
@@ -77,27 +75,32 @@ public class AlunoFormController implements Initializable {
 
         textFieldCodigo.setText(a.getCodigo());
         textFieldNome.setText(a.getNome());
+        textFieldCpf.setText(a.getCpf());
+        textFieldEndereco.setText(a.getEndereco());
+        textFieldRg.setText(a.getRg());
+        textFieldTelefone.setText(a.getTelefone());
     }
 
     public void acaoSalvar() {
+        AlunoDAO dao = new AlunoDAO(Database.getConexao());
         String codigo = textFieldCodigo.getText();
         String nome = textFieldNome.getText();
         String end = textFieldEndereco.getText();
         String rg = textFieldRg.getText();
         String cpf = textFieldCpf.getText();
         String telefone = textFieldTelefone.getText();
-
-        AlunoDAO dao = new AlunoDAO(Database.getConexao());
-        Aluno a = dao.buscaPorCodigo(codigo);
-        System.out.println(codigo);
-        if(a == null){
-            a = new Aluno(codigo, nome, rg, end, cpf, telefone);
+        Aluno a = new Aluno(codigo, nome, rg, end, cpf, telefone);
+        int id = dao.existe(a);
+        System.out.println(id);
+        
+        if(id <= 0){
+            System.out.println("Salvar");
             dao.salva(a);
         } else {
+            System.out.println("Atualizar");
+            a.setId(id);
             dao.atualiza(a);
         }
-        a = dao.buscaPorCodigo(codigo);
-        System.out.println(a);
     }
 
     public void acaoDeletar() {

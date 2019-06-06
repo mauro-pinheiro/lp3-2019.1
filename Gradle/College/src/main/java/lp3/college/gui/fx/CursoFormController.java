@@ -51,9 +51,9 @@ public class CursoFormController implements Initializable {
         Curso c;
         CursoDAO dao = new CursoDAO(Database.getConexao());
 
-        if (!codigo.isBlank()) {
+        if (!codigo.isEmpty()) {
             c = dao.buscaPorCodigo(codigo);
-        } else if (!nome.isBlank()) {
+        } else if (!nome.isEmpty()) {
             c = dao.buscaPorNome(nome);
         } else {
             System.out.println("Tudo vazio");
@@ -65,19 +65,18 @@ public class CursoFormController implements Initializable {
     }
 
     public void acaoSalvar() {
+        CursoDAO dao = new CursoDAO(Database.getConexao());
         String codigo = textFieldCodigo.getText();
         String nome = textFieldNome.getText();
-        CursoDAO dao = new CursoDAO(Database.getConexao());
-        Curso c = dao.buscaPorCodigo(codigo);
-        System.out.println(codigo);
-        if(c == null){
-            c = new Curso(codigo, nome);
-            dao.salva(c);
+        Curso p = new Curso(codigo, nome);
+        int id = dao.existe(p);
+        
+        if(id <= 0){
+            dao.salva(p);
         } else {
-            dao.atualiza(c);
+            p.setId(id);
+            dao.atualiza(p);
         }
-        c = dao.buscaPorCodigo(codigo);
-        System.out.println(c);
     }
 
     public void acaoDeletar() {

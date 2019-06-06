@@ -3,7 +3,10 @@ package lp3.college.entidades;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Aluno{
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
+
+public class Aluno implements EntidadeNomeada{
     private int id;
     private String codigo;
     private String nome;
@@ -39,6 +42,7 @@ public class Aluno{
         this.codigo = codigo;
     }
 
+    @Override
     public String getNome() {
         return nome;
     }
@@ -117,5 +121,9 @@ public class Aluno{
     public String toString() {
         return "Aluno [codigo=" + codigo + ", cpf=" + cpf + ", curso=" + curso + ", endereco=" + endereco + ", id=" + id
                 + ", nome=" + nome + ", rg=" + rg + ", telefone=" + telefone + "]";
+    }
+
+    public ObservableValue<String> cursoProperty(){
+        return new SimpleObjectProperty<String>(curso.getNome());
     }
 }

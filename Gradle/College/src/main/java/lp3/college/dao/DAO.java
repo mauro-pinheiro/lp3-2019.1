@@ -11,4 +11,6 @@ public interface DAO<T> {
     public T monta(ResultSet resultSet);
 
     public T deleta(T t);
+
+    public int existe(T t);
 }

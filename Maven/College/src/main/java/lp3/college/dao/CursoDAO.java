@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import lp3.college.entidades.Curso;
 import lp3.college.infra.Database;
@@ -14,7 +15,7 @@ import lp3.college.infra.Database;
 public class CursoDAO implements DAO<Curso> {
     private Connection conexao;
 
-    public CursoDAO(Connection conexao){
+    public CursoDAO(Connection conexao) {
         this.conexao = conexao;
     }
 
@@ -22,15 +23,14 @@ public class CursoDAO implements DAO<Curso> {
     public Curso salva(Curso curso) {
         String sql = "insert into curso(codigo, nome) values(?,?)";
 
-        try(PreparedStatement statement = conexao.prepareStatement(
-                sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement statement = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setString(1, curso.getCodigo());
-            statement.setString(2,curso.getNome());
+            statement.setString(2, curso.getNome());
 
             statement.execute();
 
-            try(ResultSet keys = statement.getGeneratedKeys()){
+            try (ResultSet keys = statement.getGeneratedKeys()) {
                 keys.next();
                 curso.setId(keys.getInt(1));
             }
@@ -45,8 +45,8 @@ public class CursoDAO implements DAO<Curso> {
     public List<Curso> getAll() {
         String sql = "select * from curso";
 
-        try(PreparedStatement statement = conexao.prepareStatement(sql)){
-            try(ResultSet resultSet = statement.executeQuery(sql)) {
+        try (PreparedStatement statement = conexao.prepareStatement(sql)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
 
                 final List<Curso> cidades = new ArrayList<>();
 
@@ -71,18 +71,18 @@ public class CursoDAO implements DAO<Curso> {
             Curso curso = new Curso(codigo, nome);
             curso.setId(id);
             return curso;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
-    public Curso buscaPorId(int id){
-        String sql = "select * from curso where id = ?";
+    public Curso buscaPorId(int id) {
+        String sql = "select * from curso where idCurso = ?";
 
-        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+        try (PreparedStatement statement = conexao.prepareStatement(sql)) {
             statement.setInt(1, id);
-            try(ResultSet resultSet = statement.executeQuery()) {
-                if(resultSet.next())
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next())
                     return monta(resultSet);
                 return null;
             }
@@ -91,13 +91,13 @@ public class CursoDAO implements DAO<Curso> {
         }
     }
 
-    public Curso buscaPorNome(String nome){
+    public Curso buscaPorNome(String nome) {
         String sql = "select * from curso where nome = ?";
 
-        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+        try (PreparedStatement statement = conexao.prepareStatement(sql)) {
             statement.setString(1, nome);
-            try(ResultSet resultSet = statement.executeQuery()) {
-                if(resultSet.next())
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next())
                     return monta(resultSet);
                 return null;
             }
@@ -106,13 +106,13 @@ public class CursoDAO implements DAO<Curso> {
         }
     }
 
-    public Curso buscaPorCodigo(String codigo){
+    public Curso buscaPorCodigo(String codigo) {
         String sql = "select * from curso where codigo = ?";
 
-        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+        try (PreparedStatement statement = conexao.prepareStatement(sql)) {
             statement.setString(1, codigo);
-            try(ResultSet resultSet = statement.executeQuery()) {
-                if(resultSet.next())
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next())
                     return monta(resultSet);
                 return null;
             }
@@ -121,10 +121,10 @@ public class CursoDAO implements DAO<Curso> {
         }
     }
 
-    public Curso atualiza(Curso curso){
+    public Curso atualiza(Curso curso) {
         String sql = "update curso set codigo = ?, nome = ? where idCurso = ?";
 
-        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+        try (PreparedStatement statement = conexao.prepareStatement(sql)) {
             statement.setString(1, curso.getCodigo());
             statement.setString(2, curso.getNome());
             statement.setInt(3, curso.getId());
@@ -141,7 +141,7 @@ public class CursoDAO implements DAO<Curso> {
     public Curso deleta(Curso curso) {
         String sql = "delete from curso where idCurso = ?";
 
-        try(PreparedStatement statement = conexao.prepareStatement(sql)){
+        try (PreparedStatement statement = conexao.prepareStatement(sql)) {
             statement.setInt(1, curso.getId());
 
             statement.execute();
@@ -164,5 +164,14 @@ public class CursoDAO implements DAO<Curso> {
         dao.deleta(curso);
         curso = dao.buscaPorCodigo("01");
         System.out.println(curso);
+    }
+
+    public int existe(Curso curso) {
+        Curso c = buscaPorCodigo(curso.getCodigo());
+        if(Objects.isNull(c)){
+            return 0;
+        } else {
+            return c.getId();
+        }
     }
 }

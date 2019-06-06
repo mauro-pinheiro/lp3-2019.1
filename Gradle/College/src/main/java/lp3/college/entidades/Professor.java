@@ -3,7 +3,7 @@ package lp3.college.entidades;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Professor{
+public class Professor implements EntidadeNomeada{
     private int id;
     private String codigo;
     private String nome;
@@ -30,6 +30,7 @@ public class Professor{
         this.codigo = codigo;
     }
 
+    @Override
     public String getNome() {
         return nome;
     }

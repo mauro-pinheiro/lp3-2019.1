@@ -1,6 +1,6 @@
 package lp3.college.entidades;
 
-public class Curso{
+public class Curso implements EntidadeNomeada{
     private int id;
     private String codigo;
     private String nome;
@@ -26,10 +26,11 @@ public class Curso{
         this.codigo = codigo;
     }
 
+    @Override
     public String getNome() {
         return nome;
     }
-
+    
     public void setNome(String nome) {
         this.nome = nome;
     }
