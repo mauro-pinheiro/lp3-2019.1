@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Objects;
 
 import lp3.college.entidades.Disciplina;
+import lp3.college.entidades.Grade;
+import lp3.college.entidades.Ministra;
 import lp3.college.infra.Database;
 
 public class DisciplinaDAO implements DAO<Disciplina> {
@@ -147,6 +149,13 @@ public class DisciplinaDAO implements DAO<Disciplina> {
 
     @Override
     public Disciplina deleta(Disciplina disciplina) {
+        MinistraDAO ministraDAO = new MinistraDAO(conexao);
+        List<Ministra> ministra = ministraDAO.buscaPorDisciplina(disciplina);
+        ministra.stream().forEach(m -> ministraDAO.deleta(m));
+
+        GradeDAO gradeDAO = new GradeDAO(conexao);
+        gradeDAO.buscaPorDisciplina(disciplina).stream().forEach(g -> gradeDAO.deleta(g));
+
         String sql = "delete from disciplina where idDisciplina = ?";
 
         try (PreparedStatement statement = conexao.prepareStatement(sql)) {

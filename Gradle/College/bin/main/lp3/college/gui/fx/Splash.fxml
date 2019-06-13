@@ -13,7 +13,7 @@
    <children>
       <AnchorPane id="AnchorPane" prefHeight="250.0" prefWidth="470.0" style="-fx-background-color: #fff;">
          <children>
-            <ProgressIndicator layoutX="182.0" layoutY="139.0" prefHeight="68.0" prefWidth="89.0" />
+            <ProgressIndicator layoutX="209.0" layoutY="125.0" prefHeight="68.0" prefWidth="89.0" />
             <TextFlow layoutY="46.0" prefHeight="31.0" prefWidth="200.0" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
                   <Text fill="#00369a" strokeType="OUTSIDE" strokeWidth="0.0" text="College">

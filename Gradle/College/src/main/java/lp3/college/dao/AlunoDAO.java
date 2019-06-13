@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -152,31 +153,37 @@ public class AlunoDAO implements DAO<Aluno> {
         }
     }
 
-    public Aluno atualiza(Aluno curso) {
+    public Aluno atualiza(Aluno aluno) {
         String sql = "update aluno set codigo = ?, nome = ?, rg = ?, cpf = ?, telefone = ?, endereco = ? where idAluno = ?";
 
         try (PreparedStatement statement = conexao.prepareStatement(sql)) {
-            statement.setString(1, curso.getCodigo());
-            statement.setString(2, curso.getNome());
-            statement.setString(3, curso.getRg());
-            statement.setString(4, curso.getCpf());
-            statement.setString(5, curso.getTelefone());
-            statement.setString(6, curso.getEndereco());
-            statement.setInt(7, curso.getId());
+            statement.setString(1, aluno.getCodigo());
+            statement.setString(2, aluno.getNome());
+            statement.setString(3, aluno.getRg());
+            statement.setString(4, aluno.getCpf());
+            statement.setString(5, aluno.getTelefone());
+            statement.setString(6, aluno.getEndereco());
+            statement.setInt(7, aluno.getId());
 
             statement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
-        return curso;
+        return aluno;
     }
 
     public Aluno atualiza(Aluno aluno, Curso curso){
+        Objects.requireNonNull(aluno, "Aluno nao pode ser null");
         aluno.setCurso(curso);
         String sql = "update aluno set idCurso = ? where idAluno = ?";
 
         try(PreparedStatement statement = conexao.prepareStatement(sql)){
-            statement.setInt(1, curso.getId());
+            if(Objects.nonNull(curso)){
+                statement.setInt(1, curso.getId());
+            }else{
+                statement.setNull(1, Types.INTEGER);
+            }
+                
             statement.setInt(2, aluno.getId());
             statement.execute();
             return aluno;

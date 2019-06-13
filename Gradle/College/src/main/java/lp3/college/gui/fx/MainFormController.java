@@ -13,7 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -29,7 +29,7 @@ public class MainFormController implements Initializable {
     @FXML
     private MenuItem menuItemTabelasAluno;
     @FXML
-    private AnchorPane anchorPane;
+    private BorderPane borderPane;
     @FXML
     private VBox vBox;
 
@@ -59,37 +59,37 @@ public class MainFormController implements Initializable {
 
     public void menuItemTabelasAlunoOnAction() throws IOException {
         Parent alunoForm = FXMLLoader.load(getClass().getResource("AlunoForm.fxml"));
-        anchorPane.getChildren().setAll(alunoForm);
+        borderPane.setCenter(alunoForm);
     }
 
     public void menuItemTabelasDisciplinaOnAction() throws IOException {
         Parent disciplinaForm = FXMLLoader.load(getClass().getResource("DisciplinaForm.fxml"));
-        anchorPane.getChildren().setAll(disciplinaForm);
+        borderPane.setCenter(disciplinaForm);
     }
 
     public void menuItemTabelasProfessorOnAction() throws IOException {
         Parent professorForm = FXMLLoader.load(getClass().getResource("ProfessorForm.fxml"));
-        anchorPane.getChildren().setAll(professorForm);
+        borderPane.setCenter(professorForm);
     }
 
     public void menuItemTabelasCursoOnAction() throws IOException {
         Parent cursoForm = FXMLLoader.load(getClass().getResource("CursoForm.fxml"));
-        anchorPane.getChildren().setAll(cursoForm);
+        borderPane.setCenter(cursoForm);
     }
 
     public void menuItemSpfGradeOnAction() throws IOException {
         Parent gradeForm = FXMLLoader.load(getClass().getResource("GradeForm.fxml"));
-        anchorPane.getChildren().setAll(gradeForm);
+        borderPane.setCenter(gradeForm);
     }
     
     public void menuItemSpfMatAlunoOnAction() throws IOException {
         Parent matAlunoForm = FXMLLoader.load(getClass().getResource("MatAluno.fxml"));
-        anchorPane.getChildren().setAll(matAlunoForm);
+        borderPane.setCenter(matAlunoForm);
     }
 
     public void menuItemSpfProfDiscOnAction() throws IOException {
         Parent profDiscForm = FXMLLoader.load(getClass().getResource("ProfDisc.fxml"));
-        anchorPane.getChildren().setAll(profDiscForm);
+        borderPane.setCenter(profDiscForm);
     }
 
 

@@ -94,6 +94,46 @@ public class GradeDAO implements DAO<Grade> {
         }
     }
 
+    public List<Grade> buscaPorDisciplina(Disciplina diciplina) {
+        String sql = "select * from grade where idDisciplina ?";
+
+        try (PreparedStatement statement = conexao.prepareStatement(sql)) {
+            statement.setInt(1, diciplina.getId());
+            System.out.println(statement.toString());
+            try (ResultSet resultSet = statement.executeQuery()) {
+                final List<Grade> grades = new ArrayList<>();
+
+                while (resultSet.next()) {
+                    Grade grade = monta(resultSet);
+                    grades.add(grade);
+                }
+                return grades;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public List<Grade> buscaPorCurso(Curso curso) {
+        String sql = "select * from grade where idDisciplina ?";
+
+        try (PreparedStatement statement = conexao.prepareStatement(sql)) {
+            statement.setInt(1, curso.getId());
+            System.out.println(statement.toString());
+            try (ResultSet resultSet = statement.executeQuery()) {
+                final List<Grade> grades = new ArrayList<>();
+
+                while (resultSet.next()) {
+                    Grade grade = monta(resultSet);
+                    grades.add(grade);
+                }
+                return grades;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
     @Override
     public Grade deleta(Grade grade) {
         String sql = "delete from grade where ano = ? and idCurso = ?";

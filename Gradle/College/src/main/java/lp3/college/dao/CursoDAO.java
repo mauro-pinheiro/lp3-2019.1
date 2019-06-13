@@ -139,6 +139,12 @@ public class CursoDAO implements DAO<Curso> {
 
     @Override
     public Curso deleta(Curso curso) {
+        GradeDAO gradeDAO = new GradeDAO(conexao);
+        gradeDAO.buscaPorCurso(curso).stream().forEach(g -> gradeDAO.deleta(g));
+
+        AlunoDAO alunoDAO = new AlunoDAO(conexao);
+        alunoDAO.buscaPorCurso(curso).stream().forEach(aluno -> alunoDAO.atualiza(aluno, null));
+
         String sql = "delete from curso where idCurso = ?";
 
         try (PreparedStatement statement = conexao.prepareStatement(sql)) {

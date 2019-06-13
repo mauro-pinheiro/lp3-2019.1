@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import lp3.college.dao.AlunoDAO;
 import lp3.college.entidades.Aluno;
 import lp3.college.infra.Database;

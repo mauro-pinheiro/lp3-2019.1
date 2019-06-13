@@ -36,6 +36,10 @@ sourceSets{
     }
 }
 
+shadowJar{
+    append 'db.properties'
+}
+
 group = 'lp3.college'
 version = '1.0-SNAPSHOT'
 

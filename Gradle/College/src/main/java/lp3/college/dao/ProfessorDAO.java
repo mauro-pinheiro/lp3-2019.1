@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import lp3.college.entidades.Ministra;
 import lp3.college.entidades.Professor;
 import lp3.college.infra.Database;
 
@@ -138,6 +139,10 @@ public class ProfessorDAO implements DAO<Professor> {
 
     @Override
     public Professor deleta(Professor professor) {
+        MinistraDAO ministraDAO = new MinistraDAO(conexao);
+        List<Ministra> ministra = ministraDAO.buscaPorProfessor(professor);
+        ministra.stream().forEach(m -> ministraDAO.deleta(m));
+
         String sql = "delete from professor where idProfessor = ?";
 
         try (PreparedStatement statement = conexao.prepareStatement(sql)) {

@@ -1,5 +1,6 @@
 package lp3.college.gui.fx;
 
+import java.io.NotActiveException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -10,12 +11,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 import lp3.college.dao.CursoDAO;
 import lp3.college.dao.DisciplinaDAO;
 import lp3.college.dao.GradeDAO;
@@ -92,6 +90,14 @@ public class GradeFormController implements Initializable {
     }
 
     public void acaoDeletar() {
-        
+        Short ano = Short.parseShort(textFieldAno.getText());
+        Curso curso = comboBoxCurso.getSelectionModel().getSelectedItem();
+        Disciplina disc = tableView.getSelectionModel().getSelectedItem();
+        GradeDAO dao = new GradeDAO(Database.getConexao());
+        dao.buscaPorId(ano, curso)
+           .stream()
+           .filter(grade -> grade.getDisciplina().equals(disc))
+           .forEach(grade -> dao.deleta(grade));
+        acaoNovo();
     }
 }

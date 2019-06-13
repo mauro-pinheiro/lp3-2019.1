@@ -15,12 +15,12 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lp3.college.gui.fx.MatAluno">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="429.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lp3.college.gui.fx.MatAluno">
    <center>
       <GridPane hgap="10.0" vgap="10.0" BorderPane.alignment="CENTER">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="59.0" minWidth="10.0" prefWidth="59.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="344.0" minWidth="10.0" prefWidth="320.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -30,7 +30,7 @@
             <Label text="Aluno" />
             <Label text="Curso" GridPane.rowIndex="1" />
             <TextField fx:id="textFieldCodigo" GridPane.columnIndex="1" />
-            <ComboBox fx:id="comboBoxCurso" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="comboBoxCurso" prefHeight="25.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -43,8 +43,8 @@
    <bottom>
       <TableView fx:id="tableViewMatAluno" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="162.0" resizable="false" text="Aluno" />
-          <TableColumn prefWidth="149.0" text="Curso" />
+          <TableColumn prefWidth="213.0" resizable="false" text="Aluno" />
+          <TableColumn prefWidth="195.0" resizable="false" text="Curso" />
         </columns>
       </TableView>
    </bottom>
